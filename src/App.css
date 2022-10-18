@@ -4,6 +4,7 @@ body {
 }
 
 .app-wrapper {
+
     width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -14,4 +15,9 @@ body {
     grid-template-rows: 50px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
+}
+
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #222222;
 }
