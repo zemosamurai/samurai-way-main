@@ -4,14 +4,18 @@ import Post from "./Post/Post";
 
 function MyPosts() {
     return (
-        <div>
-            My post
+        <div className={s.postsBlock}>
+            <h3>My post</h3>
             <div>
-                <textarea></textarea>
-                <button>Add go</button>
-                <button>Remove go</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add go</button>
+                    <button>Remove go</button>
+                </div>
             </div>
-            <div className={s.item}>
+            <div className={s.posts}>
                 <Post message={'Hi, how are you?'} likesCount={15}/>
                 <Post message={"It's my first post"} likesCount={20}/>
             </div>
