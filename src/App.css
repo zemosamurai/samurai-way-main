@@ -4,7 +4,6 @@ body {
 }
 
 .app-wrapper {
-
     width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -20,4 +19,5 @@ body {
 .app-wrapper-content {
     grid-area: c;
     background-color: #222222;
+    overflow: hidden;
 }
