@@ -13,4 +13,9 @@
     color: #71AAEB;
 }
 
+.friends {
+    display: flex;
+    justify-content: center;
+}
+
 
