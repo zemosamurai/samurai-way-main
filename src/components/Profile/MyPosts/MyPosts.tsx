@@ -1,8 +1,13 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {profilePageType} from "../../../App";
 
-function MyPosts() {
+
+function MyPosts(props: profilePageType) {
+
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+
     return (
         <div className={s.postsBlock}>
             <h3>My post</h3>
@@ -16,8 +21,7 @@ function MyPosts() {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={'Hi, how are you?'} likesCount={15}/>
-                <Post message={"It's my first post"} likesCount={20}/>
+                {postsElements}
             </div>
         </div>
     )
