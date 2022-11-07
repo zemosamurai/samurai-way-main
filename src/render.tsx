@@ -1,23 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App, {dialogsPageType, profilePageType} from './App';
-import {BrowserRouter} from "react-router-dom";
-import {addPost} from "./redux/state";
-
-
-type RenderStatePropsType = {
-    profilePage: profilePageType
-    dialogsPage: dialogsPageType
-}
-
-export let rerenderEntireThree = (state: RenderStatePropsType) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <App state={state} addPost={addPost}/>
-        </BrowserRouter>, document.getElementById('root')
-    );
-}
+// import ReactDOM from 'react-dom';
+// import App from './App';
+// import {BrowserRouter} from "react-router-dom";
+// import state, {addPost, updateNewPostText} from "./redux/state";
+//
+//
+// export let rerenderEntireThree = () => {
+//     ReactDOM.render(
+//         <BrowserRouter>
+//             <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+//         </BrowserRouter>, document.getElementById('root')
+//     );
+// }
 
 
 
