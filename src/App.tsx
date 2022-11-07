@@ -8,42 +8,21 @@ import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import {RootStateType} from "./redux/state";
 
-export type MessagesType = {
-    id: number
-    message: string
-}
 
-export type DialogsType = {
-    id: number
-    name: string
-}
-
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type profilePageType = {
-    posts: Array<PostType>
-}
-
-export type dialogsPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-}
-
- export type AppPropsType = {
-    state: {
-        profilePage: profilePageType
-        dialogsPage: dialogsPageType
-    }
-    addPost: (postMessage: string) => void
+export type AppPropsType = {
+    state: RootStateType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: AppPropsType) {
-    let SomeComponentProfile = () => <Profile state={props.state.profilePage} addPost={props.addPost}/>
+    let SomeComponentProfile = () => <Profile
+                                        profilePage={props.state.profilePage}
+                                        addPost={props.addPost}
+                                        updateNewPostText={props.updateNewPostText}
+                                    />
     let SomeComponentDialogs = () => <Dialogs state={props.state.dialogsPage}/>
 
     return (
