@@ -1,12 +1,45 @@
-import {PostType} from "../App";
-import {rerenderEntireThree} from "../render";
+let rerenderOnChange = () => {
+    console.log('State changed')
+}
 
-let state = {
+export const subscribe = (observer: ()=> void) => {
+    rerenderOnChange = observer // наблюдатель observer
+}
+
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialogsType = {
+    id: number
+    name: string
+}
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type profilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+export type dialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+}
+export type RootStateType = {
+    profilePage: profilePageType
+    dialogsPage: dialogsPageType
+}
+
+
+let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 12},
             {id: 2, message: 'It\'s my first post', likesCount: 11}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         messages: [
@@ -26,15 +59,22 @@ let state = {
     }
 }
 
-export const addPost = (postMessage: string) => {
-    debugger
-    let newPost: PostType = {
-        id: 5,
-        message: postMessage,
-        likesCount: 2
+export const addPost = () => {
+    const newPost: PostType = {
+        id: new Date().getDate(),
+        message: state.profilePage.newPostText, // дынные оюновляются ниже
+        likesCount: 0
     }
+
     state.profilePage.posts.push(newPost)
-    rerenderEntireThree(state)
+    state.profilePage.newPostText = ''
+    rerenderOnChange()
+}
+
+//обновляем данные state при каждом введении в textarea
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderOnChange()
 }
 
 export default state
