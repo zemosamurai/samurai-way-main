@@ -1,10 +1,5 @@
-let rerenderOnChange = () => {
-    console.log('State changed')
-}
-
-export const subscribe = (observer: ()=> void) => {
-    rerenderOnChange = observer // наблюдатель observer
-}
+import profileReducer, {AddPostActionType, UpdateNewPostTextType} from "./profileReducer";
+import dialogsReducer, {SendMessage, UpdateNewMessageBody} from "./dialogsReducer";
 
 export type MessagesType = {
     id: number
@@ -26,10 +21,20 @@ export type profilePageType = {
 export type dialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
+}
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    _callSubscriber: () => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -66,22 +71,35 @@ let store: StoreType = {
         console.log('State changed')
     },
 
-export const addPost = () => {
-    const newPost: PostType = {
-        id: new Date().getDate(),
-        message: state.profilePage.newPostText, // дынные оюновляются ниже
-        likesCount: 0
+    getState() {
+        return this._state
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer // наблюдатель observer
+    },
+
+    addPost() {
+        const newPost: PostType = {
+            id: new Date().getDate(),
+            message: this._state.profilePage.newPostText, // дынные оюновляются ниже
+            likesCount: 0
+        }
+
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber()
+    },
+    updateNewPostText(newText) {
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber()
+    },
+
+    dispatch(action) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber()
+
     }
-
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ''
-    rerenderOnChange()
 }
 
-//обновляем данные state при каждом введении в textarea
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    rerenderOnChange()
-}
-
-export default state
+export default store
