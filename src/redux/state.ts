@@ -33,31 +33,38 @@ export type RootStateType = {
 }
 
 
-let state: RootStateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how are you?', likesCount: 12},
-            {id: 2, message: 'It\'s my first post', likesCount: 11}
-        ],
-        newPostText: ''
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | UpdateNewMessageBody | SendMessage
+
+let store: StoreType = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, message: 'Hi, how are you?', likesCount: 12},
+                {id: 2, message: 'It\'s my first post', likesCount: 11}
+            ],
+            newPostText: ''
+        },
+        dialogsPage: {
+            messages: [
+                {id: 1, message: 'Hi'},
+                {id: 2, message: 'Im Kim'},
+                {id: 3, message: 'Yo'},
+                {id: 4, message: 'Yo'},
+                {id: 5, message: 'Yo'}
+            ],
+            dialogs: [
+                {id: 1, name: 'Sasha'},
+                {id: 2, name: 'Petya'},
+                {id: 3, name: 'Vitaliy'},
+                {id: 4, name: 'Denis'},
+                {id: 5, name: 'Victor'}
+            ],
+            newMessageBody: ''
+        }
     },
-    dialogsPage: {
-        messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'Im Kim'},
-            {id: 3, message: 'Yo'},
-            {id: 4, message: 'Yo'},
-            {id: 5, message: 'Yo'}
-        ],
-        dialogs: [
-            {id: 1, name: 'Sasha'},
-            {id: 2, name: 'Petya'},
-            {id: 3, name: 'Vitaliy'},
-            {id: 4, name: 'Denis'},
-            {id: 5, name: 'Victor'}
-        ]
-    }
-}
+    _callSubscriber() {
+        console.log('State changed')
+    },
 
 export const addPost = () => {
     const newPost: PostType = {
