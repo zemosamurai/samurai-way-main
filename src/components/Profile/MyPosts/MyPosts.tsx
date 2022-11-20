@@ -6,9 +6,7 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 
 type MyPostPropsType = {
     posts: Array<PostType>
-    // addPost: () => void
     newPostText: string
-    // updateNewPostText: (newText: string) => void
     dispatch: (action: ActionsType) => void
 }
 
