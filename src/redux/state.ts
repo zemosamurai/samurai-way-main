@@ -81,7 +81,7 @@ let store: StoreType = {
     addPost() {
         const newPost: PostType = {
             id: new Date().getDate(),
-            message: this._state.profilePage.newPostText, // дынные оюновляются ниже
+            message: this._state.profilePage.newPostText,
             likesCount: 0
         }
 
