@@ -17,8 +17,16 @@ export type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-    let SomeComponentProfile = () => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>
-    let SomeComponentDialogs = () => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>
+    let SomeComponentProfile = () => <Profile
+        // profilePage={props.state.profilePage}
+        // dispatch={props.dispatch}
+        store={props.store}
+    />
+    let SomeComponentDialogs = () => <DialogsContainer
+        store={props.store}
+        // state={props.state.dialogsPage}
+        // dispatch={props.dispatch}
+    />
 
     return (
 
