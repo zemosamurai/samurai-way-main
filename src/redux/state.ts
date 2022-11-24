@@ -31,12 +31,9 @@ export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubscriber: () => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-
 
 export type ActionsType = AddPostActionType | UpdateNewPostTextType | UpdateNewMessageBody | SendMessage
 
@@ -78,27 +75,10 @@ let store: StoreType = {
         this._callSubscriber = observer // наблюдатель observer
     },
 
-    addPost() {
-        const newPost: PostType = {
-            id: new Date().getDate(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-    },
-
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber()
-
     }
 }
 
