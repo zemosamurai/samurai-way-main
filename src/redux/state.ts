@@ -1,41 +1,40 @@
-import profileReducer, {AddPostActionType, UpdateNewPostTextType} from "./profileReducer";
-import dialogsReducer, {SendMessage, UpdateNewMessageBody} from "./dialogsReducer";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
-export type MessagesType = {
+ type MessagesType = {
     id: number
     message: string
 }
-export type DialogsType = {
+ type DialogsType = {
     id: number
     name: string
 }
-export type PostType = {
+ type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type profilePageType = {
+ type profilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-export type dialogsPageType = {
+ type dialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     newMessageBody: string
 }
-export type RootStateType = {
+ type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 }
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: any) => void
 }
 
-export type ActionsType = AddPostActionType | UpdateNewPostTextType | UpdateNewMessageBody | SendMessage
 
 let store: StoreType = {
     _state: {
