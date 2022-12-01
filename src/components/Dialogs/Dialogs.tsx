@@ -2,13 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {dialogsPageType} from "../../redux/state";
-
-type DialogsPropsType = {
-    state: dialogsPageType
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
-}
+import {DialogsPropsType} from "./DialogsContainer";
 
 const Dialogs = (props: DialogsPropsType) => {
     let dialogsElements = props.state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
@@ -17,12 +11,10 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const onSendMessageClick = () => {
         props.sendMessage()
-        // props.dispatch(sendMessageCreator())
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
         props.updateNewMessageBody(body)
-        // props.dispatch(updateNewMessageBodyCreator(body))
     }
 
     return (
