@@ -22,27 +22,20 @@ const initialState = {
         {id: 4, name: 'Denis'},
         {id: 5, name: 'Victor'}
     ] as Array<DialogsType>,
-    newMessageBody: '' as string
+    newMessageBody: ''
 }
-
 export type InitialStateType = typeof initialState
 
-
-const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':
-            // state.newMessageBody = action.body
             return {...state, newMessageBody: action.body}
         case 'SEND-MESSAGE' :
-            let copyState = {...state}
-            let body = copyState.newMessageBody
-            copyState.newMessageBody = ''
-            copyState.messages.push({id: 6, message: body})
-            return copyState
+            let body = state.newMessageBody
+            return {...state, newMessageBody: '', messages: [...state.messages, {id: 6, message: body}]}
         default:
             return state
     }
-
 }
 
 type ActionsType = UpdateNewMessageBodyType | SendMessageType
