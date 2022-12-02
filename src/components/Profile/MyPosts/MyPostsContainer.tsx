@@ -1,13 +1,18 @@
 import React from "react";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
+import {addPostActionCreator, PostType, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import {StoreType} from "../../../redux/state";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
-type MyPostPropsType = {
-    // posts: Array<PostType>
-    // newPostText: string
-    // dispatch: (action: ActionsType) => void
-    store: StoreType
+export type MyPostPropsType = MapStateToPropsType & mapDispatchToPropsType
+type MapStateToPropsType = {
+    posts: PostType[]
+    newPostText: string
+}
+type mapDispatchToPropsType = {
+    updateNewPostText: (text: string) => void
+    onAddPost: () => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
