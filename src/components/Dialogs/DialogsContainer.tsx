@@ -13,11 +13,19 @@ type DialogsPropsType = {
 const DialogsContainer = (props: DialogsPropsType) => {
     let state = props.store.getState().dialogsPage
 
-    const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        state: state.dialogsPage
     }
-    const onNewMessageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+}
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        updateNewMessageBody: (body: string) => {
+            dispatch(updateNewMessageBodyCreator(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageCreator())
+        }
     }
 
     return (
