@@ -1,14 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {MyPostPropsType} from "./MyPostsContainer";
 
-type MyPostPropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    onAddPost: () => void
-}
 
 function MyPosts(props: MyPostPropsType) {
 
@@ -16,13 +10,11 @@ function MyPosts(props: MyPostPropsType) {
 
     const onClickAddPost = () => {
         props.onAddPost()
-        // props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
         props.updateNewPostText(text)
-        // props.dispatch(updateNewPostTextActionCreator(text))
     }
 
     return (
