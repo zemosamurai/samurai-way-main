@@ -10,16 +10,22 @@ type MyPostPropsType = {
     store: StoreType
 }
 
-function MyPostsContainer(props: MyPostPropsType) {
-    let state = props.store.getState()
-
-    const onAddPost = () => {
-        props.store.dispatch(addPostActionCreator())
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText,
     }
-
-    let onPostChange = (text: string) => {
-        props.store.dispatch(updateNewPostTextActionCreator(text))
+}
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        updateNewPostText: (text: string) => {
+            dispatch(updateNewPostTextActionCreator(text))
+        },
+        onAddPost: () => {
+            dispatch(addPostActionCreator())
+        }
     }
+}
 
     return (
         <MyPosts
