@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    DialogsType,
     InitialStateType,
     sendMessageCreator,
     updateNewMessageBodyCreator
