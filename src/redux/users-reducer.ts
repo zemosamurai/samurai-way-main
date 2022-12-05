@@ -1,15 +1,16 @@
 export type UserType = {
     id: number
-    avatarUrl: string
-    fullName: string
+    uniqueUrlName: string
+    photos: {small: string, large: string}
+    name: string
     followed: boolean
     status: string
-    location: { city: string, country: string }
+    // location: { city: string, country: string }
 }
 
 const initialState = {
     users: [
-        {
+      /*  {
             id: 1,
             avatarUrl: 'https://i.pinimg.com/originals/86/95/54/8695540db1e9224367ed9d1a4884ccfc.jpg',
             followed: false,
@@ -40,11 +41,11 @@ const initialState = {
             fullName: 'Dmitro',
             status: 'I am a boss',
             location: {city: 'Kiev', country: 'Ukraine'}
-        },
+        },*/
     ] as Array<UserType>,
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 export const UsersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
