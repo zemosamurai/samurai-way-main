@@ -6,7 +6,7 @@ import {MyPostPropsType} from "./MyPostsContainer";
 
 function MyPosts(props: MyPostPropsType) {
 
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map((p, index) => <Post key={index} message={p.message} likesCount={p.likesCount}/>)
 
     const onClickAddPost = () => {
         props.onAddPost()
