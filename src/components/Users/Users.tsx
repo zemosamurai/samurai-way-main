@@ -1,6 +1,18 @@
 import React from 'react';
 import {UsersPropsType} from "./UsersContainer";
 import s from './Users.module.css'
+import axios from "axios";
+import userPhoto from '../../assets/images/user.png'
+
+class Users extends React.Component<UsersPropsType> {
+
+    componentDidMount() {
+        axios
+            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    }
 
 export const Users = (props: UsersPropsType) => {
     const onFollowHandler = (userId: number) => {
