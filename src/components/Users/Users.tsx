@@ -14,18 +14,20 @@ class Users extends React.Component<UsersPropsType> {
             })
     }
 
-export const Users = (props: UsersPropsType) => {
-    const onFollowHandler = (userId: number) => {
-        props.follow(userId)
+    onFollowHandler = (userId: number) => {
+        this.props.follow(userId)
     }
-    const onUnFollowHandler = (userId: number) => {
-        props.unFollow(userId)
+    onUnFollowHandler = (userId: number) => {
+        this.props.unFollow(userId)
     }
-    return (
-        <div>
-            {props.users.map(el => {
-                return (
-                    <div key={el.id}>
+
+    render() {
+        return (
+            <div>
+                {/*<button onClick={()=>console.log(this.props.usersPage.users)}>get Users</button>*/}
+                {this.props.usersPage.users.map(el => {
+                    return (
+                        <div key={el.id}>
                         <span>
                             <div>
                                 <img
@@ -37,24 +39,27 @@ export const Users = (props: UsersPropsType) => {
                             <div>
                                 {
                                     el.followed
-                                    ? <button onClick={() => onUnFollowHandler(el.id)}>Unfollow</button>
-                                    : <button onClick={() => onFollowHandler(el.id)}>Follow</button>
+                                        ? <button onClick={() => this.onUnFollowHandler(el.id)}>Unfollow</button>
+                                        : <button onClick={() => this.onFollowHandler(el.id)}>Follow</button>
                                 }
                             </div>
                         </span>
-                        <span>
                             <span>
-                                <div>{el.fullName}</div>
+                            <span>
+                                <div>{el.name}</div>
                                 <div>{el.status}</div>
                             </span>
                             <span>
-                                <div>{el.location.country}</div>
-                                <div>{el.location.city}</div>
+                                <div>{'el.location.country'}</div>
+                                <div>{'el.location.city'}</div>
                             </span>
                         </span>
-                    </div>
-                )
-            })}
-        </div>
-    )
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
 }
+
+export default Users
