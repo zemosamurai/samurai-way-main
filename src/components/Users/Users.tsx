@@ -16,7 +16,11 @@ export const Users = (props: UsersPropsType) => {
                     <div key={el.id}>
                         <span>
                             <div>
-                                <img className={s.userAvatar} src={el.avatarUrl} alt="#"/>
+                                <img
+                                    className={s.userAvatar}
+                                    src={el.photos.small !== null ? el.photos.small : userPhoto}
+                                    alt="#"
+                                />
                             </div>
                             <div>
                                 {
