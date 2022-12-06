@@ -5,7 +5,6 @@ export type UserType = {
     name: string
     followed: boolean
     status: string
-    // location: { city: string, country: string }
 }
 
 const initialState = {
@@ -56,7 +55,7 @@ export const UsersReducer = (state = initialState, action: ActionsType): Initial
             return {...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: false} : el)}
         }
         case 'SET-USERS': {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users} //[...state.users, ...action.users]
         }
         default:
             return state
