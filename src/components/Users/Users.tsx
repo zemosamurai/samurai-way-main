@@ -24,7 +24,6 @@ class Users extends React.Component<UsersPropsType> {
     render() {
         return (
             <div>
-                {/*<button onClick={()=>console.log(this.props.usersPage.users)}>get Users</button>*/}
                 {this.props.usersPage.users.map(el => {
                     return (
                         <div key={el.id}>
