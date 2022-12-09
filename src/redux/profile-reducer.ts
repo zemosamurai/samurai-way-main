@@ -14,7 +14,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost: PostType = {
@@ -49,5 +49,3 @@ export const updateNewPostTextActionCreator = (text: string) => {
     } as const
 }
 
-
-export default profileReducer
