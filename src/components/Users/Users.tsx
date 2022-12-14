@@ -43,6 +43,19 @@ class Users extends React.Component<UsersPropsType> {
 
         return (
             <div>
+                {pages.map((el, i) => {
+                    return (
+                        <span
+                            key={i}
+                            className={this.props.currentPage === el ? s.selectedPage : ''}
+                            onClick={(e) => {
+                                this.onPageChanged(el)
+                            }}
+                        >
+                            {el}
+                        </span>
+                    )
+                })}
                 {this.props.usersPage.users.map(el => {
                     return (
                         <div key={el.id}>
