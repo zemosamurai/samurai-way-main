@@ -9,6 +9,9 @@ export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 type mapStateToPropsType = {
     usersPage: InitialStateType
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 type mapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -18,7 +21,11 @@ type mapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
+
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
