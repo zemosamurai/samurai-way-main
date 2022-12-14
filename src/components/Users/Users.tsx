@@ -16,6 +16,7 @@ class Users extends React.Component<UsersPropsType> {
             })
     }
 
+
     onFollowHandler = (userId: number) => {
         this.props.follow(userId)
     }
@@ -33,6 +34,13 @@ class Users extends React.Component<UsersPropsType> {
     }
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div>
                 {this.props.usersPage.users.map(el => {
