@@ -1,64 +1,43 @@
-import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
-import s from './Users.module.css'
-import axios from "axios";
-import userPhoto from '../../assets/images/user.png'
+import React from "react";
+import s from "./Users.module.css";
+import userPhoto from "../../assets/images/user.png";
+import {UserType} from "../../redux/users-reducer";
 
-class Users extends React.Component<UsersPropsType> {
+type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<UserType>
+    onUnFollowHandler: (id: number) => void
+    onFollowHandler: (id: number) => void
+}
 
-    componentDidMount() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+export const Users = (props: UsersPropsType) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
 
-            })
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-
-    onFollowHandler = (userId: number) => {
-        this.props.follow(userId)
-    }
-    onUnFollowHandler = (userId: number) => {
-        this.props.unFollow(userId)
-    }
-
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-    }
-
-    render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = []
-
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-
-        return (
-            <div>
-                {pages.map((el, i) => {
-                    return (
-                        <span
-                            key={i}
-                            className={this.props.currentPage === el ? s.selectedPage : ''}
-                            onClick={(e) => {
-                                this.onPageChanged(el)
-                            }}
-                        >
-                            {el}
-                        </span>
-                    )
-                })}
-                {this.props.usersPage.users.map(el => {
-                    return (
-                        <div key={el.id}>
+    return (
+        <div>
+            {pages.map((el, i) => {
+                return (
+                    <span
+                        key={i}
+                        className={props.currentPage === el ? s.selectedPage : ''}
+                        onClick={(e) => {
+                            props.onPageChanged(el)
+                        }}
+                    >{el}
+                    </span>
+                )
+            })}
+            {props.users.map(el => {
+                return (
+                    <div key={el.id}>
                         <span>
                             <div>
                                 <img
@@ -70,12 +49,12 @@ class Users extends React.Component<UsersPropsType> {
                             <div>
                                 {
                                     el.followed
-                                        ? <button onClick={() => this.onUnFollowHandler(el.id)}>Unfollow</button>
-                                        : <button onClick={() => this.onFollowHandler(el.id)}>Follow</button>
+                                        ? <button onClick={() => props.onUnFollowHandler(el.id)}>Unfollow</button>
+                                        : <button onClick={() => props.onFollowHandler(el.id)}>Follow</button>
                                 }
                             </div>
                         </span>
-                            <span>
+                        <span>
                             <span>
                                 <div>{el.name}</div>
                                 <div>{el.status}</div>
@@ -85,12 +64,9 @@ class Users extends React.Component<UsersPropsType> {
                                 <div>{'el.location.city'}</div>
                             </span>
                         </span>
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
-
-export default Users
