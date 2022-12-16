@@ -1,12 +1,14 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {MapStateType} from "./ProfileContainer";
 
 
-function Profile() {
+function Profile(props: MapStateType) {
     return (
         <div>
-            <ProfileInfo/>
+
+            <ProfileInfo {...props}/>
             <MyPostsContainer/>
         </div>
     )
