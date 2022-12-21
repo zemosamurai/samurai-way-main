@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component<PropsType> {
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
-                this.props.setUserProfile(response.data)
+                this.props.setUserProfileAC(response.data)
             })
     }
 
@@ -32,7 +32,6 @@ class ProfileContainer extends React.Component<PropsType> {
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
-
 
 const mapStateToProps = (state: AppStateType)  => ({
     profile: state.profilePage.profile
@@ -43,7 +42,7 @@ let withUrlDataContainerComponent = withRouter(ProfileContainer)
 export type MapStateType = ReturnType<typeof mapStateToProps>
 
 const action = {
-    setUserProfile: setUserProfileAC
+    setUserProfileAC: setUserProfileAC
 }
 type MapDispatchType = typeof action
 

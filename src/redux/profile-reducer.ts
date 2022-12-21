@@ -68,7 +68,6 @@ export const addPostActionCreator = () => {
     } as const
 }
 
-
 export type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
 export const updateNewPostTextActionCreator = (text: string) => {
     return {
