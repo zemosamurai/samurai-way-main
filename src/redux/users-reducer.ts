@@ -12,7 +12,8 @@ const initialState = {
     pageSize: 5, // сколько наша страница вмещает
     totalUsersCount: 0, // сколько всего получим пользователей
     currentPage: 1, // текущая страница на которой находимся
-    isFetching: true // отображаем preload
+    isFetching: true, // отображаем preload
+    followingInProgressBtn: [] as Array<number>
 }
 
 export type InitialStateType = typeof initialState
@@ -37,13 +38,22 @@ export const UsersReducer = (state = initialState, action: ActionsType): Initial
         case 'TOGGLE-IS-FETCHING': {
             return {...state, isFetching: action.isFetching}
         }
+        case 'TOGGLE-IS-FOLLOWING-PROGRESS': {
+            return {
+                ...state,
+                followingInProgressBtn:
+                action.followingProgress
+                    ?  [...state.followingInProgressBtn, action.userId]
+                    :  state.followingInProgressBtn.filter(id => id !== action.userId)
+            }
+        }
+
         default:
             return state
     }
-
 }
 
-type ActionsType = FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType | SetUsersTotalCountACType | ToggleIsFetchingACType
+type ActionsType = FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType | SetUsersTotalCountACType | ToggleIsFetchingACType | toggleIsFollowingProgressACType
 
 export type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userID: number) => {
@@ -90,6 +100,15 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching
+    } as const
+}
+
+export type toggleIsFollowingProgressACType = ReturnType<typeof toggleIsFollowingProgressAC>
+export const toggleIsFollowingProgressAC = (followingProgress: boolean, userId: number) => {
+    return {
+        type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
+        followingProgress,
+        userId
     } as const
 }
 
