@@ -1,31 +1,37 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
+
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {setAuthUserDataAC} from "../../redux/auth-reducer";
+import {headerLoginTC, setAuthUserDataAC} from "../../redux/auth-reducer";
 
-export type ContainerType = mapStateToPropsType & ActionType
+export type ContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
     isAuth: boolean
     login: string | null
 }
 
-type ActionType = typeof action
+export type mapDispatchToPropsType = {
+    // setAuthUserDataAC: (userId: number, login: string, email: string) => void
+    headerLoginTC: () => void
+}
+
+// type ActionType = typeof action
 
 class HeaderContainer extends React.Component<ContainerType> {
     componentDidMount() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-                withCredentials: true
-            })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let {email, id, login} = response.data.data
-                    this.props.setAuthUserDataAC(id, login, email)
-                }
-            })
+        // axios
+        //     .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+        //         withCredentials: true
+        //     })
+        //     .then(response => {
+        //         if (response.data.resultCode === 0) {
+        //             let {email, id, login} = response.data.data
+        //             this.props.setAuthUserDataAC(id, login, email)
+        //         }
+        //     })
+        this.props.headerLoginTC()
     }
 
     render() {
@@ -37,8 +43,9 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 })
-const action = {
-    setAuthUserDataAC: setAuthUserDataAC
-}
 
-export default connect(mapStateToProps, action)(HeaderContainer)
+
+export default connect(mapStateToProps, {
+    // setAuthUserDataAC: setAuthUserDataAC,
+    headerLoginTC: headerLoginTC
+})(HeaderContainer)
