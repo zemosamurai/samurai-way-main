@@ -10,7 +10,7 @@ function Header(props: mapStateToPropsType) {
 
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? props.login
+                    ? <div>{props.login}</div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
