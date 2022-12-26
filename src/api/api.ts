@@ -1,5 +1,8 @@
 import axios from "axios";
 
+
+// --------------------------------------  ЭТО УСЛОВНО НАШ !!! DAL !!! -----------------------------------
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -23,12 +26,17 @@ export const usersAPI = {
         return  instance
             .post(`follow/${id}`)
             .then(response => response.data)
-    }
+    },
+    headerLogin: () => {
+        return instance
+            .get(`auth/me`)
+            .then(response => response.data)
+    },
+    // setUserProfile: (userId: string) => {
+    //     return instance
+    //         .get(`profile/${userId}`)
+    //         .then(response => response.data)
+    // }
 }
 
-// export const getUsers = (currentPage = 1, pageSize = 1) => {
-//    return  instance
-//        .get(`users?page=${currentPage}&count=${pageSize}`)
-//        .then(response => response.data)
-// }
 
