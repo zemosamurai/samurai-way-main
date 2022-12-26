@@ -16,6 +16,7 @@ function ProfileInfo(props: MapStateType) {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="#"/>
+                <p>{props.profile.fullName}</p>
                 <p>{props.profile.aboutMe}</p>
                 ava + description
             </div>
