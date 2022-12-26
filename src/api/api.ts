@@ -27,16 +27,17 @@ export const usersAPI = {
             .post(`follow/${id}`)
             .then(response => response.data)
     },
-    headerLogin: () => {
+    getProfile: (userId: string) => {
+        return instance
+            .get(`profile/${userId}`)
+    }
+}
+
+export const authAPI = {
+    me: () => {
         return instance
             .get(`auth/me`)
-            .then(response => response.data)
     },
-    // setUserProfile: (userId: string) => {
-    //     return instance
-    //         .get(`profile/${userId}`)
-    //         .then(response => response.data)
-    // }
 }
 
 
