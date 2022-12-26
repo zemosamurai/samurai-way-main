@@ -23,10 +23,6 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    // setUsers: (users: Array<UserType>) => void
-    // setCurrentPage: (pageNumber: number) => void
-    // setTotalUsersCount: (totalCount: number) => void
-    // toggleIsFetchingAC: (isFetching: boolean) => void
     toggleIsFollowingProgressAC: (followingProgress: boolean, userId: number) => void
     getUsersTC: (currentPage: number, pageSize: number) => void
 }
@@ -34,30 +30,10 @@ type mapDispatchToPropsType = {
 class UsersAPIComponent extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
-        // this.props.toggleIsFetchingAC(true);
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetchingAC(false);
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //     })
     }
 
-    /*    onFollowHandler = (userId: number) => {
-            this.props.follow(userId)
-        }
-        onUnFollowHandler = (userId: number) => {
-            this.props.unFollow(userId)
-        }*/
     onPageChanged = (pageNumber: number) => {
         this.props.getUsersTC(pageNumber, this.props.pageSize)
-        // this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetchingAC(true);
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetchingAC(false);
-        //         this.props.setUsers(data.items)
-        //     })
     }
 
     render() {
@@ -72,7 +48,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                     users={this.props.usersPage.users}
                     followTC={this.props.follow}
                     unFollowTC={this.props.unFollow}
-                    // toggleIsFollowingProgressAC={this.props.toggleIsFollowingProgressAC}
                     followingInProgressBtn={this.props.followingInProgressBtn}
                 />
             </>
@@ -117,10 +92,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 export const UsersContainer = connect(mapStateToProps, {
     follow: followTC,
     unFollow: unFollowTC,
-    // setUsers: setUsersAC,
-    // setCurrentPage: setCurrentPageAC,
-    // setTotalUsersCount: setUsersTotalCountAC,
-    // toggleIsFetchingAC: toggleIsFetchingAC,
     toggleIsFollowingProgressAC: toggleIsFollowingProgressAC,
     getUsersTC: getUsersTC
 })(UsersAPIComponent)
