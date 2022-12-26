@@ -7,7 +7,6 @@ import {MapStateType} from "./ProfileContainer";
 function Profile(props: MapStateType) {
     return (
         <div>
-
             <ProfileInfo {...props}/>
             <MyPostsContainer/>
         </div>
