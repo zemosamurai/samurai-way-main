@@ -1,5 +1,5 @@
 import {profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+// import {dialogsReducer} from "./dialogs-reducer";
 
  type MessagesType = {
     id: number
@@ -76,9 +76,9 @@ let store: StoreType = {
 
     dispatch(action) {
         // this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber()
     }
 }
 
-export default store
+// export default store
