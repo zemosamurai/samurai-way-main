@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {Preloader} from "../../common/preloader/Preloader";
 import {MapStateType} from "../ProfileContainer";
+import {ProfileStatus} from "./ProfileStatus";
 
 function ProfileInfo(props: MapStateType) {
     if (!props.profile) {
@@ -16,6 +17,7 @@ function ProfileInfo(props: MapStateType) {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="#"/>
+                <ProfileStatus/>
                 <p>{props.profile.fullName}</p>
                 <p>{props.profile.aboutMe}</p>
                 ava + description
