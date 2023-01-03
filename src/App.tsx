@@ -6,7 +6,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersAPIComponent from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
@@ -20,7 +20,7 @@ function App() {
             <div className='app-wrapper-content'>
                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/users' render={() => <UsersAPIComponent/>}/>
                 <Route path='/login' render={() => <Login/>}/>
 
                 <Route path='/news' component={News}/>

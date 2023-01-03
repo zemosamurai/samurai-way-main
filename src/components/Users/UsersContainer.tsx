@@ -10,6 +10,8 @@ import {
 } from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from "../common/preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 type mapStateToPropsType = {
@@ -66,6 +68,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         followingInProgressBtn: state.usersPage.followingInProgressBtn
     }
 }
+
+
 // const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 //     return {
 //         follow: (userId) => {
@@ -89,10 +93,14 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 //     }
 // }
 
-export const UsersContainer = connect(mapStateToProps, {
-    follow: followTC,
-    unFollow: unFollowTC,
-    toggleIsFollowingProgressAC: toggleIsFollowingProgressAC,
-    getUsersTC: getUsersTC
-})(UsersAPIComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        follow: followTC,
+        unFollow: unFollowTC,
+        toggleIsFollowingProgressAC: toggleIsFollowingProgressAC,
+        getUsersTC: getUsersTC
+    }),
+    withAuthRedirect
+)(UsersAPIComponent)
+
 
