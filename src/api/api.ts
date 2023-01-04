@@ -28,8 +28,8 @@ export const usersAPI = {
             .then(response => response.data)
     },
     getProfile: (userId: string) => {
-        return instance
-            .get(`profile/${userId}`)
+        console.warn('Obsolete method. Please profileAPI object')
+        return profileAPI.getProfile(userId)
     }
 }
 
