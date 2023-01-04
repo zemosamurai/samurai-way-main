@@ -1,16 +1,19 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {setStatusAC} from "./profile-reducer";
 
 export type InitialStateType = {
     userId: null | number,
     login: null | string,
     email: null | string,
+    rememberMe: null | boolean,
     isAuth: boolean
 }
 const initialState = {
     userId: null,
     login: null,
     email: null,
+    rememberMe: null,
     isAuth: false
 }
 
@@ -48,5 +51,27 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch<ActionsType>) => {
         }
     })
 }
+
+
+// export type setLoginUserACType = ReturnType<typeof setLoginUserAC>
+// export const setLoginUserAC = (email: string, password: string, rememberMe: boolean) => {
+//     return {
+//         type: 'SET-LOGIN-USER',
+//         payload: {
+//             email,
+//             password,
+//             rememberMe
+//         }
+//     } as const
+// }
+//
+// export const setLoginUserTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<ActionsType>) => {
+//     authAPI.login(email, password, rememberMe).then(response => {
+//         if (response.data.resultCode === 0) {
+//             dispatch(setLoginUserAC(email, password, rememberMe))
+//         }
+//     })
+// }
+
 
 
