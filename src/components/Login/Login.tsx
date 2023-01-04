@@ -1,7 +1,28 @@
 import React from 'react';
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {AppStateType} from "../../redux/redux-store";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {getStatusTC, getUserProfileTC, updateStatusTC} from "../../redux/profile-reducer";
+import {withRouter} from "react-router-dom";
+// import {setLoginUserTC} from "../../redux/auth-reducer";
+
+type FormDataType =  {
+    login: string
+    password: string
+    rememberMe: boolean
+}
 
 export const Login = () => {
-    return <h1>Login</h1>
+    const onSubmit = (formData: FormDataType) => {
+        // setLoginUserTC(formData.login, formData.password, formData.rememberMe)
+        console.log(formData)
+    }
+
+    return <div>
+        <h1>Login</h1>
+        <LoginReduxForm onSubmit={onSubmit}/>
+    </div>
 }
 
 
