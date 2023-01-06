@@ -5,6 +5,8 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {getStatusTC, getUserProfileTC, updateStatusTC} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
+import {authAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 // import {setLoginUserTC} from "../../redux/auth-reducer";
 
 type FormDataType =  {
@@ -16,7 +18,7 @@ type FormDataType =  {
 export const Login = () => {
     const onSubmit = (formData: FormDataType) => {
         // setLoginUserTC(formData.login, formData.password, formData.rememberMe)
-        console.log(formData)
+        // console.log(formData)
     }
 
     return <div>
@@ -45,7 +47,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-
+authAPI.login('zemosamurai@gmail.com', 'kisly=>kim', false)
+    .then(res => console.log(res))
 
 // const mapStateToProps = (state: AppStateType) => ({
 //     login: state.form

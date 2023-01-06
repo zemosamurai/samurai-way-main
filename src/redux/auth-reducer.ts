@@ -22,6 +22,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
         case 'SET-USER-DATA' : {
             return {...state, ...action.payload, isAuth: true}
         }
+
         default:
             return state
     }
@@ -66,12 +67,13 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch<ActionsType>) => {
 // }
 //
 // export const setLoginUserTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<ActionsType>) => {
-//     authAPI.login(email, password, rememberMe).then(response => {
-//         if (response.data.resultCode === 0) {
+//     authAPI.login(email, password, rememberMe)
+//         .then(response => {
+//             console.log(response)
 //             dispatch(setLoginUserAC(email, password, rememberMe))
-//         }
-//     })
+//         })
+//         .catch(er => console.log(er))
 // }
-
-
+//
+//
 
