@@ -4,7 +4,11 @@ import {Preloader} from "../../common/preloader/Preloader";
 import {MapStateType} from "../ProfileContainer";
 import {ProfileStatus} from "./ProfileStatus";
 
-function ProfileInfo(props: MapStateType) {
+type ProfileInfoPropsType = {
+    updateStatus: (status: string) => void
+}
+
+function ProfileInfo(props: MapStateType & ProfileInfoPropsType) {
     if (!props.profile) {
         return <Preloader/>
     }
@@ -17,7 +21,7 @@ function ProfileInfo(props: MapStateType) {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="#"/>
-                <ProfileStatus/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <p>{props.profile.fullName}</p>
                 <p>{props.profile.aboutMe}</p>
                 ava + description
